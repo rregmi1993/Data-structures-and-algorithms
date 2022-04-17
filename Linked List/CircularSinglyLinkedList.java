@@ -66,6 +66,26 @@ public class CircularSinglyLinkedList {
 		size++;
 	}
 	
+	void insertAtIndex(int index, int val) {
+		if(index<0 || index>size) {
+			System.out.println("Invalid index: " + index + " of size: " + size);
+			return;
+		}
+		
+		if(index == 0) {
+			insertAtHead(val);
+		}
+		else if(size == index) {
+			insertAtTail(val);
+		}
+		else {
+			Node currNode = new Node(val);
+			Node preNode = getPrevNode(index - 1);
+			currNode.next= preNode.next;
+			preNode.next = currNode;
+		}
+		size++;
+	}
 	
 	void deleteAtIndex(int index) {
 		if(index<0 || index>size) return;
@@ -105,6 +125,9 @@ public class CircularSinglyLinkedList {
 		circularSinglyLinkedList.insertAtHead(2);
 		circularSinglyLinkedList.insertAtHead(1);
 		circularSinglyLinkedList.insertAtTail(5);
+		circularSinglyLinkedList.insertAtIndex(3, 4);
+		circularSinglyLinkedList.display();
+		System.out.println("-------------------------");
 		circularSinglyLinkedList.deleteAtIndex(1);
 		circularSinglyLinkedList.display();
 		
