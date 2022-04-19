@@ -87,10 +87,18 @@ public class DoublyLinkedList {
 	}
 	
 	void deleteAtIndex(int index) {
+		
+		if(index<0 || index>size) return;
+		
+		if(index == 0) {
+			head = head.next;
+			head.prev = null;
+		}
+		else {
 		Node prevNode = getPrevNode(index - 1);
 		prevNode.next.prev = prevNode;
 		prevNode.next = prevNode.next.next;
-		
+		}
 		size--;
 	}
 
@@ -108,7 +116,7 @@ public class DoublyLinkedList {
 		
 		System.out.println("-------------------------------");
 		
-		doublyLinkedList.deleteAtIndex(6);
+		doublyLinkedList.deleteAtIndex(0);
 		doublyLinkedList.display();
 		
 		
