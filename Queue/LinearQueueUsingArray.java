@@ -5,7 +5,7 @@ public class LinearQueueUsingArray {
 	
 	int front;
 	int rear;
-	int [] queueArr;
+	int []queueArr;
 	
 	public void createQueue(int size) {
 		queueArr = new int[size];
