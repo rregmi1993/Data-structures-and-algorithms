@@ -10,11 +10,6 @@ public class BinaryTreeUsingLinkedList {
 		Node(int val){
 			this.value = val;
 		}
-		
-		/*
-		 * Node(int val, Node left, Node right){ this.value = val; this.left = left;
-		 * this.right = right; }
-		 */
 	}
 
 	Node root;
