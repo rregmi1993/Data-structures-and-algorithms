@@ -1,5 +1,7 @@
 package bst;
 
+import java.awt.geom.CubicCurve2D;
+
 public class BinarySearchTree {
 
 	class Node {
@@ -77,13 +79,66 @@ public class BinarySearchTree {
     	}
 		
 	}
+    
+    
+    public void delete(int value) {
+    	if(root == null) {
+    		System.out.println("Invalid Operation !!!");
+    		return;
+    	}
+    	deleteNode(root, value);
+    }
 
+    private Node deleteNode(Node root, int value) {
+    	
+    	if(root.value > value) {
+    		root.left = deleteNode(root.left, value);
+    	}
+    	else if(root.value < value) {
+    		root.right = deleteNode(root.right, value);
+    	}
+    	else {
+    		if(root.left != null && root.right != null) {
+    			Node tempNode = root;
+    			Node minimumNode = getMinimumNode(tempNode.right);
+    			root.value = minimumNode.value;
+    			root.right = deleteNode(root.right, minimumNode.value);
+    		}
+    		else if(root.left != null) {
+    			root = root.left;
+    		}
+    		else if(root.right != null) {
+    			root = root.right;
+    		}
+    		else {
+    			root = null;
+    		}
+    	}
+    	
+    	return root;
+    }
+    
+    public Node getMinimumNode(Node root) {
+    	if(root.left == null) {
+    		return root;
+    	}
+    	else {
+    		return getMinimumNode(root.right);
+    	}
+    }
 	public static void main(String arrs[]) {
 		BinarySearchTree bst = new BinarySearchTree();
 		bst.createBST();
-		bst.insert(10);
-		bst.insert(20);
-		bst.insert(5);
+		bst.insert(50);
+		bst.insert(30);
+	    bst.insert(20);
+	    bst.insert(40);
+	    bst.insert(70);
+	    bst.insert(60);
+	    bst.insert(80);
+	    bst.delete(20);
+	    bst.delete(30);
+	    bst.delete(50);
 		System.out.println("-----In Order Traversal-------");
 		bst.inorder();
 		System.out.println("-----Pre Order Traversal-------");
