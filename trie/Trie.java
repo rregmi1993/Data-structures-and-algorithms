@@ -54,7 +54,7 @@ public class Trie {
 	public boolean searchWord(String searchWord) {
 		
 		TrieNode currNode = root;
-		for(int k = 0 ; k < searchWord.length(); k++) {
+		for(int k = 0; k < searchWord.length(); k++) {
 			char ch = searchWord.charAt(k);
 			TrieNode newNode = currNode.child.get(ch);
 			if(newNode == null) return false;
@@ -64,6 +64,40 @@ public class Trie {
 		
 		return currNode.endOfWord;
 	}
+	
+	
+	public void deleteWord(String word) {
+		if(searchWord(word) == true) {
+			delete(root, word, 0);
+		}
+	}
+	
+	private boolean delete(TrieNode currNode, String word, int index) {
+		
+		if(index == word.length()) {
+			if(!currNode.endOfWord) {
+				return false;
+			}
+			currNode.endOfWord = false;
+			return currNode.child.size() == 0;
+		}
+		
+		char ch = word.charAt(index);
+		TrieNode newNode = currNode.child.get(ch);
+		if(newNode == null) {
+			return false;
+		}
+		
+		boolean deleteNode = delete(newNode, word, index+1);
+		if(deleteNode) {
+			currNode.child.remove(ch);
+			return currNode.child.size() == 0;
+		}
+		
+		
+		
+		return false;
+	}
 
 	public static void main(String[] args) {
 		Trie trie = new Trie();
@@ -71,8 +105,10 @@ public class Trie {
 		trie.insert("apple");
 		trie.insert("orange");
 		System.out.println(trie.prefixSearch("app"));
-		System.out.println(trie.prefixSearch("orgn"));
 		System.out.println(trie.searchWord("apple"));
+		trie.deleteWord("orange");
+		System.out.println(trie.searchWord("orange"));
+		
 	}
 
 }
