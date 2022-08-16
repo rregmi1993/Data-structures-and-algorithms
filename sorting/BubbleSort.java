@@ -5,7 +5,7 @@ public class BubbleSort {
 	
 	public static int[] bubbleSort(int [] nums){
 		int length = nums.length;
-		for(int i = 0; i<length- 1; i++) {
+		for(int i = 0; i<length - 1; i++) {
 			boolean flag = false;
 			for(int j = 0; j <length - i - 1; j++) {
 				if(nums[j]>nums[j+1]) {
